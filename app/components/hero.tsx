@@ -6,6 +6,7 @@ import ValuesSection from './values';
 export default function HeroSection() {
   return (
     <div className="relative min-h-screen bg-primary-light dark:bg-primary-dark">
+      {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           alt="Background"
@@ -26,14 +27,42 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 min-h-screen flex flex-col justify-center"
+        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 min-h-screen flex flex-col"
       >
-        <div className="flex flex-col items-center justify-center text-center space-y-16">
+        {/* Logo Section */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="pt-8 md:pt-12 mb-8"
+        >
+          <div className="relative w-64 h-24 mx-auto">
+            {/* Light Mode Logo */}
+            <Image
+              src="/logo.png"
+              alt="Sioufi & Co Logo"
+              fill
+              priority
+              className="object-contain block dark:hidden transition-opacity duration-300"
+            />
+            {/* Dark Mode Logo */}
+            <Image
+              src="/logo-invert.png"
+              alt="Sioufi & Co Logo"
+              fill
+              priority
+              className="object-contain hidden dark:block transition-opacity duration-300"
+            />
+          </div>
+        </motion.div>
+
+        {/* Main Content */}
+        <div className="flex flex-col items-center justify-center text-center space-y-16 flex-grow">
           <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="text-7xl font-bold font-title tracking-tight text-text-primary dark:text-text-light sm:text-9xl"
+            className="text-5xl md:text-7xl lg:text-9xl font-bold font-title tracking-tight text-text-primary dark:text-text-light"
           >
             A legacy of trust
           </motion.h1>

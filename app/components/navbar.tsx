@@ -17,14 +17,16 @@ const navigation = [
 ]
 
 const Logo = ({ theme }: { theme: string }) => (
-  <Image
-    src={theme === 'light' ? '/logo.png' : '/logo-invert.png'}
-    alt="Logo"
-    width={400}
-    height={400}
-    priority
-    className="w-auto h-9"
-  />
+  <div className="relative w-[120px] h-[40px]"> {/* Fixed aspect ratio container */}
+    <Image
+      src={theme === 'light' ? '/logo.png' : '/logo-invert.png'}
+      alt="Logo"
+      fill
+      priority
+      className="object-contain"
+      sizes="(max-width: 768px) 120px, 160px"
+    />
+  </div>
 )
 
 export default function Navbar() {

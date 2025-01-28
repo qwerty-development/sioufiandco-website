@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, Loader2 } from 'lucide-react'
+import { Send, Loader2, Home } from 'lucide-react'
 import Navbar from '../components/navbar'
+import Link from 'next/link'
 
 interface FormData {
 	name: string
@@ -56,6 +57,22 @@ export default function ContactForm() {
 	}
 
 	return (
+        <>
+        {/* Home Icon */}
+        <div className="fixed top-6 right-6 z-50">
+          <Link href="/">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg backdrop-blur-sm
+                       hover:bg-gold-50 dark:hover:bg-gray-700
+                       transition-all duration-300"
+            >
+              <Home className="size-6 text-gray-700 dark:text-white hover:text-gold-500 dark:hover:text-gold-500" />
+            </motion.div>
+          </Link>
+        </div>
+  
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
@@ -195,6 +212,7 @@ export default function ContactForm() {
 				</button>
 			</form>
 		</motion.div>
+        </>
 	)
 }
 

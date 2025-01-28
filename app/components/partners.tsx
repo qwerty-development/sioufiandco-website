@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-// (Optional) If you need an arrow icon, install react-icons: `npm i react-icons`
 import { FaArrowRight } from 'react-icons/fa'
 
 const logos = [
@@ -23,27 +22,24 @@ export default function PartnerLogos() {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <h2 className="font-title text-5xl md:text-6xl text-text-light mb-6 bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent">Our Trusted Partners</h2>
+        <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-text-light mb-6 bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent">
+          Our Trusted Partners
+        </h2>
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8" />
-        <p className="mt-4 text-text-muted text-2xl font-light italic">
+        <p className="mt-4 text-text-muted text-xl sm:text-2xl font-light italic">
           Collaborating with the finest in the insurance industry
         </p>
       </motion.div>
 
-      {/* Desktop View */}
-      <div className="hidden lg:block">
+      {/* Desktop and Medium Screens */}
+      <div className="hidden md:block">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="mx-32 "
+          className="container mx-auto px-4 lg:px-8"
         >
-          {/* 
-            You can use a grid to easily control sizing.
-            For instance, grid-cols-6 if you always want 6 columns.
-            Adjust gap-8 or col-span if you want more/less spacing.
-          */}
-          <div className="grid grid-cols-6 gap-8 ">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6 lg:gap-8">
             {logos.map((logo, index) => (
               <motion.div
                 key={logo.name}
@@ -51,17 +47,20 @@ export default function PartnerLogos() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative bg-secondary-light/5 dark:bg-white/90
-                           rounded-xl p-8 hover:bg-secondary-light/10 dark:hover:bg-secondary-dark/10 
-                           transition-all duration-300 flex items-center justify-center group
-                           w-80 h-60"
+                         rounded-xl p-4 md:p-6 lg:p-8 
+                         hover:bg-secondary-light/10 dark:hover:bg-secondary-dark/10 
+                         transition-all duration-300 
+                         flex items-center justify-center group
+                         aspect-square md:aspect-[4/3] lg:aspect-[3/2]"
               >
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  width={500}
-                  height={500}
-                  className=" filter   group-hover:grayscale-0 transition-all duration-300"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={logo.src}
+                    alt={logo.name}
+                    fill
+                    className="object-contain filter group-hover:grayscale-0 transition-all duration-300 p-2"
+                  />
+                </div>
               </motion.div>
             ))}
           </div>
@@ -69,12 +68,8 @@ export default function PartnerLogos() {
       </div>
 
       {/* Mobile View */}
-      <div className="lg:hidden relative">
+      <div className="md:hidden relative">
         <div className="overflow-x-auto scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
-          {/* 
-            A small arrow that pulses to indicate you can scroll. 
-            Adjust styling/position as needed. 
-          */}
           <motion.div
             initial={{ x: 0 }}
             animate={{ x: [0, 10, 0] }}
@@ -84,17 +79,16 @@ export default function PartnerLogos() {
             <FaArrowRight />
           </motion.div>
 
-          {/* A subtle gradient on the right side as another hint */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: [0.3, 1, 0.3] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="absolute right-0 top-0 h-full w-12 
-                       bg-gradient-to-l from-primary-light/80 dark:from-primary-dark/80 
-                       to-transparent pointer-events-none"
+                     bg-gradient-to-l from-primary-light/80 dark:from-primary-dark/80 
+                     to-transparent pointer-events-none"
           />
 
-          <div className="flex gap-6 px-4 min-w-max pb-4 justify-center">
+          <div className="flex gap-4 px-4 min-w-max pb-4">
             {logos.map((logo, index) => (
               <motion.div
                 key={logo.name}
@@ -102,16 +96,17 @@ export default function PartnerLogos() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative bg-secondary-light/5 dark:bg-white/90
-                           rounded-xl p-6 flex items-center justify-center group
-                           flex-shrink-0 w-80 h-40"
+                         rounded-xl p-4 flex items-center justify-center group
+                         flex-shrink-0 w-60 h-40"
               >
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  width={500}
-                  height={500}
-                  className="object-contain filter  group-hover:grayscale-0 transition-all duration-300"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={logo.src}
+                    alt={logo.name}
+                    fill
+                    className="object-contain filter group-hover:grayscale-0 transition-all duration-300 p-2"
+                  />
+                </div>
               </motion.div>
             ))}
           </div>

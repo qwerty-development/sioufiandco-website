@@ -203,7 +203,7 @@ export const insuranceProducts: { [key: string]: InsuranceProduct } = {
         "Theft and burglary coverage",
         "Machinery breakdown coverage",
         "Business interruption coverage",
-        "Public liability coverage"
+        "Public liability coverages"
     ],
     additionalInfo: {
         industrial: "Suitable for factories, warehouses, and other industrial properties",

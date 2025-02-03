@@ -1,277 +1,110 @@
 'use client'
-import React, { useState } from 'react';
-import { Mail, Linkedin, Phone } from 'lucide-react';
+import React from 'react';
+import Image from 'next/image';
 
 interface TeamMember {
   id: number;
   name: string;
   position: string;
-  department: string;
   image: string;
-  bio: string;
-  email: string;
-  linkedin: string;
-  phone: string;
-  education: string[];
-  expertise: string[];
 }
 
-interface DepartmentMap {
-  [key: string]: string;
-}
-
-interface TeamMemberCardProps {
-  member: TeamMember;
-}
-
-interface TeamMemberDetailProps {
-  member: TeamMember;
-  onClose: () => void;
-}
-
-interface GroupedTeam {
-  [key: string]: TeamMember[];
-}
-
-// Sample team data structure
 const teamData: TeamMember[] = [
   {
     id: 1,
-    name: "John Smith",
-    position: "Chief Executive Officer",
-    department: "Executive",
-    image: "/api/placeholder/400/400",
-    bio: "20+ years of experience in insurance and risk management...",
-    email: "john.smith@company.com",
-    linkedin: "https://linkedin.com/in/johnsmith",
-    phone: "+1234567890",
-    education: [
-      "MBA, Harvard Business School",
-      "BS in Economics, Yale University"
-    ],
-    expertise: ["Strategic Planning", "Risk Management", "Digital Transformation"]
+    name: "Nicolas Sioufi",
+    position: "Chairman and managing partner",
+    image: "/team/nicolassioufi.png",
+  },
+  {
+    id: 2,
+    name: "Linda Sioufi Hayek",
+    position: "General manager and managing partner",
+    image: "/team/lindasioufi.png",
+  },
+  {
+    id: 3,
+    name: "Mohammed Salloum",
+    position: "Courrier",
+    image: "/team/mohammedsalloum.png",
+  },
+  {
+    id: 4,
+    name: "Gregoire Ahmarani",
+    position: "Head of technical department",
+    image: "/team/gregoire.png",
+  },
+  {
+    id: 5,
+    name: "Joelle Abi Mansour",
+    position: "Manager, customer care and colletion department",
+    image: "/team/joelle.png",
+  },
+  {
+    id: 6,
+    name: "Jihanne Kassen",
+    position: "Account and executive medical, claims and accounting",
+    image: "/team/jihane.png",
+  },
+  {
+    id: 7,
+    name: "Carla Ghanem",
+    position: "Manager, customer care and medical claims department",
+    image: "/team/carla.png",
+  },
+  {
+    id: 8,
+    name: "Ibrahim Chehade",
+    position: "Customer care and claims department",
+    image: "/team/ibrahim.png",
   },
 ];
 
-// Group leaders by department
-const departments: DepartmentMap = {
-  "Executive": "Leadership Team",
-  "Sales": "Sales Team",
-  "Technical": "Technical Team",
-  "Support": "Support Team"
-};
-
 const TeamSection: React.FC = () => {
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
-  const [activeDepartment, setActiveDepartment] = useState<string>('all');
-
-  const groupedTeam: GroupedTeam = teamData.reduce((acc: GroupedTeam, member) => {
-    const dept = member.department;
-    if (!acc[dept]) {
-      acc[dept] = [];
-    }
-    acc[dept].push(member);
-    return acc;
-  }, {});
-
-  const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => (
-    <div className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-      <div className="relative mb-4 group">
-        <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-100">
-          <img
-            src={member.image}
-            alt={member.name}
-            className="w-full h-full object-cover"
-          />
+  const TeamMemberCard = ({ member }: { member: TeamMember }) => (
+    <div className="group relative flex flex-col items-center p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+      <div className="relative mb-6">
+        <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden bg-gradient-to-br from-[#1B365D]/50 to-[#1B365D] ring-4 ring-white/10 dark:ring-white/5 shadow-lg">
+          <div className="relative w-full h-full">
+            <Image
+              src={member.image}
+              alt={member.name}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
         </div>
       </div>
-
-      <h3 className="text-xl font-bold text-gray-800 mb-1 text-center">{member.name}</h3>
-      <p className="text-gray-600 mb-3 text-center font-medium">{member.position}</p>
       
-      <div className="flex gap-3 mb-4">
-        <button
-          onClick={() => window.location.href = `mailto:${member.email}`}
-          className="p-2 text-gray-600 hover:text-blue-600 transition-colors duration-200"
-          aria-label="Email"
-        >
-          <Mail className="w-5 h-5" />
-        </button>
-        <a
-          href={member.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-2 text-gray-600 hover:text-blue-600 transition-colors duration-200"
-          aria-label="LinkedIn"
-        >
-          <Linkedin className="w-5 h-5" />
-        </a>
-        <button
-          onClick={() => window.location.href = `tel:${member.phone}`}
-          className="p-2 text-gray-600 hover:text-blue-600 transition-colors duration-200"
-          aria-label="Phone"
-        >
-          <Phone className="w-5 h-5" />
-        </button>
-      </div>
-
-      <button
-        onClick={() => setSelectedMember(member)}
-        className="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium"
-      >
-        View Profile
-      </button>
-    </div>
-  );
-
-  const TeamMemberDetail: React.FC<TeamMemberDetailProps> = ({ member, onClose }) => (
-    <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <button
-          onClick={onClose}
-          className="mb-6 text-gray-600 hover:text-gray-800 transition-colors duration-200"
-        >
-          ← Back to Team
-        </button>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="md:col-span-1">
-            <div className="w-full aspect-square rounded-full overflow-hidden bg-gray-100 mb-4">
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-800">{member.name}</h3>
-                <p className="text-gray-600 font-medium">{member.position}</p>
-                <p className="text-gray-500">{member.department}</p>
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={() => window.location.href = `mailto:${member.email}`}
-                  className="p-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 bg-gray-100 rounded-full"
-                  aria-label="Email"
-                >
-                  <Mail className="w-5 h-5" />
-                </button>
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 bg-gray-100 rounded-full"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <button
-                  onClick={() => window.location.href = `tel:${member.phone}`}
-                  className="p-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 bg-gray-100 rounded-full"
-                  aria-label="Phone"
-                >
-                  <Phone className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="md:col-span-2 space-y-6">
-            <div>
-              <h2 className="text-xl font-bold mb-2">About</h2>
-              <p className="text-gray-600 leading-relaxed">{member.bio}</p>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-bold mb-2">Education</h2>
-              <ul className="list-disc list-inside text-gray-600 space-y-1">
-                {member.education.map((edu, index) => (
-                  <li key={index}>{edu}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-bold mb-2">Areas of Expertise</h2>
-              <div className="flex flex-wrap gap-2">
-                {member.expertise.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="text-center space-y-2">
+        <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent">
+          {member.name}
+        </h3>
+        <p className="text-sm md:text-base text-text-secondary dark:text-text-muted font-medium px-4 leading-relaxed">
+          {member.position}
+        </p>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="font-title text-4xl sm:text-5xl md:text-6xl mb-6 text-gold-500 bg-clip-text leading-relaxed pt-3 pb-1">
-          Our Team
-        </h2>
-
-        {/* Department Filter */}
-        <div className="flex gap-2 mb-12 overflow-x-auto pb-2">
-          <button
-            onClick={() => setActiveDepartment('all')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 whitespace-nowrap
-              ${activeDepartment === 'all'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-          >
-            All Teams
-          </button>
-          {Object.keys(departments).map(dept => (
-            <button
-              key={dept}
-              onClick={() => setActiveDepartment(dept)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 whitespace-nowrap
-                ${activeDepartment === dept
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-            >
-              {departments[dept]}
-            </button>
-          ))}
+    <div className="min-h-screen bg-primary-light dark:bg-primary-dark py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="font-title text-4xl sm:text-5xl md:text-6xl mb-6 bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent leading-relaxed pt-3 pb-1">
+            Our Team
+          </h2>
+          <div className="w-32 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8" />
+          <p className="text-lg md:text-xl text-text-secondary dark:text-text-muted">
+            Meet the dedicated professionals behind our success
+          </p>
         </div>
 
-        {selectedMember ? (
-          <TeamMemberDetail
-            member={selectedMember}
-            onClose={() => setSelectedMember(null)}
-          />
-        ) : (
-          <div className="space-y-16">
-            {activeDepartment === 'all' ? (
-              Object.entries(groupedTeam).map(([dept, members]) => (
-                <div key={dept}>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-6">{departments[dept]}</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                    {members.map((member) => (
-                      <TeamMemberCard key={member.id} member={member} />
-                    ))}
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {groupedTeam[activeDepartment]?.map((member) => (
-                  <TeamMemberCard key={member.id} member={member} />
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
+          {teamData.map((member) => (
+            <TeamMemberCard key={member.id} member={member} />
+          ))}
+        </div>
       </div>
     </div>
   );

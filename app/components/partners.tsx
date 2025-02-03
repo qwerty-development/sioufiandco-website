@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { FaArrowRight } from 'react-icons/fa'
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 
 const logos = [
-  { name: 'Arope', src: '/logo/arope.png' },
-  { name: 'Assurex', src: '/logo/assurex.png' },
-  { name: 'AXA', src: '/logo/axa.png' },
-  { name: 'Bankers', src: '/logo/bankers.png' },
-  { name: 'Fidelity', src: '/logo/fidelity.png' },
-  { name: 'GMI', src: '/logo/gmi.png' },
-]
+  { name: "Arope", src: "/logo/arope.png" },
+  { name: "Lia Assurex", src: "/logo/liaassurex.png" },
+  { name: "AXA", src: "/logo/axa.png" },
+  { name: "Bankers", src: "/logo/bankers.png" },
+  { name: "Fidelity", src: "/logo/fidelity.png" },
+  { name: "SNA", src: "/logo/sna.png" },
+];
 
 export default function PartnerLogos() {
   return (
@@ -22,7 +22,7 @@ export default function PartnerLogos() {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-text-light mb-6 bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent">
+        <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-text-light mb-6 bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent leading-relaxed pt-3 pb-1">
           Our Trusted Partners
         </h2>
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8" />
@@ -69,7 +69,10 @@ export default function PartnerLogos() {
 
       {/* Mobile View */}
       <div className="md:hidden relative">
-        <div className="overflow-x-auto scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
+        <div
+          className="overflow-x-auto scroll-smooth"
+          style={{ scrollBehavior: "smooth" }}
+        >
           <motion.div
             initial={{ x: 0 }}
             animate={{ x: [0, 10, 0] }}
@@ -113,5 +116,5 @@ export default function PartnerLogos() {
         </div>
       </div>
     </div>
-  )
+  );
 }

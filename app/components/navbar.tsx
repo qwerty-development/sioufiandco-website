@@ -14,6 +14,7 @@ const navigation = [
   { name: 'About', href: '/about' },
   { name: 'Services', href: '/#services' }, // Updated href to include hash
   { name: 'Contact', href: '/contact' },
+  { name: 'News and Events ', href: '/newsandevents' },
 ]
 
 const Logo = ({ theme }: { theme: string }) => (

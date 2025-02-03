@@ -126,9 +126,9 @@ export default function ServicesSection() {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-             <h2 className="font-title text-5xl md:text-6xl text-text-light mb-6 bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent">
-              Our Services
-            </h2>
+<h2 className="font-title text-5xl md:text-6xl text-text-light mb-6 bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent leading-relaxed pt-3 pb-1">
+  Our Services
+</h2>
             <div className="w-32 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8" />
             <p className="mt-6 text-text-muted text-xl md:text-2xl font-light leading-relaxed max-w-4xl mx-auto">
               Customization at its best. Since its inception, Sioufi & Co, relies on strong ties with major international 

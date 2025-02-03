@@ -42,7 +42,13 @@ export default {
           500: '#D4AF37',
           600: '#B8860B',
         }
-      }
+      },
+      fontFamily: {
+        'avenir': ['Avenir', 'sans-serif'],
+        'avenir-condensed': ['Avenir Next Condensed', 'sans-serif'],
+        'avenir-book': ['Avenir Book', 'sans-serif'],
+        'jane': ['Jane Austen', 'serif'],
+      },
     },
   },
   plugins: [],

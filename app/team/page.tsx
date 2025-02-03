@@ -24,40 +24,45 @@ const teamData: TeamMember[] = [
   },
   {
     id: 3,
-    name: "Mohammed Salloum",
-    position: "Courrier",
-    image: "/team/mohammedsalloum.png",
-  },
-  {
-    id: 4,
     name: "Gregoire Ahmarani",
     position: "Head of technical department",
     image: "/team/gregoire.png",
   },
   {
-    id: 5,
+    id: 4,
     name: "Joelle Abi Mansour",
     position: "Manager, customer care and colletion department",
     image: "/team/joelle.png",
   },
   {
-    id: 6,
-    name: "Jihanne Kassen",
-    position: "Account and executive medical, claims and accounting",
-    image: "/team/jihane.png",
-  },
-  {
-    id: 7,
+    id: 5,
     name: "Carla Ghanem",
     position: "Manager, customer care and medical claims department",
     image: "/team/carla.png",
   },
   {
-    id: 8,
+    id: 6,
     name: "Ibrahim Chehade",
     position: "Customer care and claims department",
     image: "/team/ibrahim.png",
   },
+  {
+    id: 7,
+    name: "Jihanne Kassen",
+    position: "Account and executive medical, claims and accounting",
+    image: "/team/jihane.png",
+  },
+  {
+    id: 9,
+    name: "Mohammed Salloum",
+    position: "Courrier",
+    image: "/team/mohammedsalloum.png",
+  },
+
+
+
+
+
 ];
 
 const TeamSection: React.FC = () => {

@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { Calendar, Clock, ArrowRight, Building2 } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Building2, Download } from 'lucide-react';
 import Image from 'next/image';
 
 const companyNewsData = [
@@ -16,6 +16,45 @@ const companyNewsData = [
         featured: false,
         image: '/news/axasioufi.jpg'
     },
+    {
+      id: 2,
+      title: "Interview with Nicolas Sioufi: Lebanese Insurance Market Overcomes Crisis Impact",
+      titleAr: "لقاء مع نقولا سيوفي: تمكّن سوق التأمين في لبنان من تجاوز تداعيات الأزمة",
+      date: "2025-01-16",
+      category: "Interviews",
+      summary: "Nicolas Sioufi (Chairman of SIOUFI & CO) discusses the state of the Lebanese insurance sector after the economic crisis and how it overcame current challenges.",
+      summaryAr: "نقولا سيوفي (رئيس مجلس إدارة شركة SIOUFI & CO) يتحدث عن وضع قطاع التأمين اللبناني بعد الأزمة الاقتصادية، وكيفية تجاوزه تحديات المرحلة الراهنة.",
+      content: {
+        introduction: "We paid a visit to SIOUFI & CO for a special meeting, during which we had an in-depth conversation with Mr. Nicolas Sioufi, Chairman of the Board. He explained that the insurance sector in Lebanon - after enduring unprecedented challenges over the past few years - is now positioning itself on a new foundation, with a modern mindset and fresh vision. According to Mr. Sioufi, despite having encountered turbulence due to the economic crisis, the sector has begun redefining its core principles and approaches, aiming to step confidently into a new era. This evolution is especially vital as the country prepares for imminent economic transformations that demand adaptability and innovative thinking.",
+        
+        mainQuote: "It is well known that Lebanon insurance sector is trying to keep pace with rapidly unfolding economic conditions. The setbacks we experienced have paved the way for a stronger, more resilient industry that is proactively aligning itself with emerging global standards. True, there have been obstacles - particularly fluctuations in currency exchange rates and broader financial instability - but the sectors ability to regroup and reorganize has proven impressive.",
+        
+        sections: [
+          {
+            title: "Challenges and the Path to Recovery",
+            content: "Mr. Sioufi discussed how 2023 was marked by a range of geopolitical and economic difficulties around the world, from the war in Ukraine and rising inflationary pressures to increasing costs of reinsurance. This global context inevitably spilled over into Lebanon, creating further complications for local businesses and families alike. Yet, SIOUFI & CO and other key players in the insurance market managed to navigate these issues through a combination of careful planning and prudent decision-making."
+          },
+          {
+            title: "Planning for a New Generation",
+            content: "It is essential to recognize that a new generation of clients is entering the market. They bring fresh expectations and demand digital solutions that streamline the entire insurance process. We see this not as a challenge but as an opportunity to modernize our offerings and keep step with international trends. However, we must do it in a way that preserves personalized service - because in a country like Lebanon, strong, direct client relationships are crucial for building trust."
+          },
+          {
+            title: "Corporate Social Responsibility and Community Support",
+            content: "Mr. Sioufi underscored the importance of social responsibility in the insurance sector, particularly during times of upheaval. Given the difficulties facing many Lebanese families - economic hardships, cuts in essential services, and limited access to affordable healthcare - he believes the insurance market has a duty to contribute positively to the broader community."
+          },
+          {
+            title: "Prospects for 2024 and Beyond",
+            content: "Looking ahead, Mr. Sioufi shared an optimistic yet cautious perspective. While the global and local headwinds may persist, he sees the insurance market in Lebanon evolving steadily, laying the groundwork for renewed growth. The year 2024 is brimming with potential. We are exploring ways to launch digital platforms to serve our clients more efficiently. Nonetheless, we are mindful that digital transformation must be accompanied by hands-on support and genuine customer care."
+          }
+        ],
+        
+        conclusion: "In Mr. Sioufi view, Lebanon insurance market is already displaying strong signs of recovery and long-term resilience. Though challenges remain - from currency volatility to regional instability - the sectors swift adaptation, innovation, and commitment to social responsibility have laid a robust foundation for future progress. Despite all the hardships, we have proven that we are capable of weathering storms and emerging with greater resolve. Our clients deserve the best possible coverage and protection for themselves and their families, and we intend to deliver on that promise, no matter the obstacles. It is precisely through collective effort - insurers, policymakers, businesses, and clients - that we will continue to raise industry standards and ensure a more secure future for everyone."
+      },
+      author: "Al Bayan",
+      department: "Executive Office",
+      featured: false,
+      image: "/news/nicolassioufi.png"
+    }
 ];
 
 const NewsAndEventsPage = () => {
@@ -93,64 +132,106 @@ const NewsAndEventsPage = () => {
     </div>
   );
 
-  const ArticlePage = ({ article, onClose }:any) => (
-    <div className="fixed inset-0 bg-primary-light dark:bg-primary-dark z-50 overflow-y-auto">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <button
-          onClick={onClose}
-          className="mb-6 text-text-secondary dark:text-text-muted hover:text-gold-400 transition-colors duration-200"
-        >
-          ← Back to News
-        </button>
+  const ArticlePage = ({ article, onClose }:any) => {
+  
+    return (
+      <div className="fixed inset-0 bg-primary-light dark:bg-primary-dark z-50 overflow-y-auto">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="flex justify-between items-center mb-6">
+            <button
+              onClick={onClose}
+              className="text-text-secondary dark:text-text-muted hover:text-gold-400 transition-colors duration-200"
+            >
+              ← Back to News
+            </button>
 
-        <div className="mb-6">
-          <span className="inline-block px-3 py-1 text-sm font-medium bg-[#1B365D] text-gold-400 rounded-full mr-2">
-            {article.category}
-          </span>
-          {article.featured && (
-            <span className="inline-block px-3 py-1 text-sm font-medium bg-gold-400/20 text-gold-400 rounded-full">
-              Featured
+          </div>
+  
+          <div className="mb-6">
+            <span className="inline-block px-3 py-1 text-sm font-medium bg-[#1B365D] text-gold-400 rounded-full mr-2">
+              {article.category}
             </span>
+            {article.featured && (
+              <span className="inline-block px-3 py-1 text-sm font-medium bg-gold-400/20 text-gold-400 rounded-full">
+                Featured
+              </span>
+            )}
+          </div>
+  
+          <div className="aspect-video mb-6 overflow-hidden rounded-lg">
+            <div className="relative w-full h-full">
+              <Image
+                src={article.image}
+                alt={article.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+  
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent mb-4 font-serif">
+            {article.title}
+          </h1>
+          
+          {article.titleAr && (
+            <h2 className="text-2xl mb-4 text-text-secondary dark:text-text-muted font-serif">
+              {article.titleAr}
+            </h2>
           )}
-        </div>
-
-        <div className="aspect-video mb-6 overflow-hidden rounded-lg">
-          <div className="relative w-full h-full">
-            <Image
-              src={article.image}
-              alt={article.title}
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent mb-4 font-serif">
-          {article.title}
-        </h1>
-        
-        <div className="flex items-center justify-between text-text-secondary dark:text-text-muted text-sm mb-8 border-b border-white/10 pb-4">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center">
-              <Calendar className="w-4 h-4 mr-1" />
-              <span>{formatDate(article.date)}</span>
+          
+          <div className="flex items-center justify-between text-text-secondary dark:text-text-muted text-sm mb-8 border-b border-white/10 pb-4">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center">
+                <Calendar className="w-4 h-4 mr-1" />
+                <span>{formatDate(article.date)}</span>
+              </div>
+              <div className="flex items-center">
+                <Building2 className="w-4 h-4 mr-1" />
+                <span>{article.department}</span>
+              </div>
             </div>
-            <div className="flex items-center">
-              <Building2 className="w-4 h-4 mr-1" />
-              <span>{article.department}</span>
-            </div>
+            <span className="italic">By {article.author}</span>
           </div>
-          <span className="italic">By {article.author}</span>
-        </div>
-
-        <div className="prose max-w-none dark:prose-invert">
-          <p className="text-text-secondary dark:text-text-muted leading-relaxed">
-            {article.content}
-          </p>
+  
+          <div className="prose max-w-none dark:prose-invert">
+            {typeof article.content === "string" ? (
+              <p className="text-text-secondary dark:text-text-muted leading-relaxed">
+                {article.content}
+              </p>
+            ) : (
+              <>
+                <p className="text-lg mb-8 text-text-secondary dark:text-text-muted">{article.content.introduction}</p>
+                
+                <blockquote className="border-l-4 border-gold-400 text-text-secondary dark:text-text-muted  pl-4 my-8 italic">
+                  {article.content.mainQuote}
+                </blockquote>
+                
+                {article.content.sections.map((section: { title: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; content: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, index: React.Key | null | undefined) => (
+                  <div key={index} className="mb-8">
+                    <h3 className="text-2xl font-bold text-gold-400 mb-4">
+                      {section.title}
+                    </h3>
+                    <p className="text-text-secondary dark:text-text-muted leading-relaxed">
+                      {section.content}
+                    </p>
+                  </div>
+                ))}
+                
+                <div className="mt-8 p-6 bg-white/5 rounded-lg">
+                  <h3 className="text-2xl font-bold text-gold-400 mb-4">
+                    Conclusion
+                  </h3>
+                  <p className="text-text-secondary dark:text-text-muted leading-relaxed">
+                    {article.content.conclusion}
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-primary-light dark:bg-primary-dark">

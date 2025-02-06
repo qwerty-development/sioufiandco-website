@@ -11,6 +11,7 @@ const logos = [
   { name: "Bankers", src: "/logo/bankers.png" },
   { name: "Fidelity", src: "/logo/fidelity.png" },
   { name: "SNA", src: "/logo/sna.png" },
+  { name: "Cumberland", src: "/logo/cumberland.png" },
 ];
 
 export default function PartnerLogos() {
@@ -39,7 +40,7 @@ export default function PartnerLogos() {
           transition={{ duration: 0.8 }}
           className="container mx-auto px-4 lg:px-8"
         >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
             {logos.map((logo, index) => (
               <motion.div
                 key={logo.name}

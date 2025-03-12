@@ -5,6 +5,39 @@ import Image from 'next/image';
 
 const companyNewsData = [
     {
+        id: 3,
+        title: "Sioufi & Co Celebrate 70 Years in the Insurance Industry",
+        date: "2024-06-14",
+        category: "Anniversary",
+        summary: "Sioufi & Co marks a significant milestone with their 70th anniversary celebration in the insurance industry. The two-day event brought together partners, clients, and employees to commemorate seven decades of excellence and trust.",
+        content: {
+          introduction: "On June 26th, 2025, Sioufi & Co celebrated 70 years of excellence in the insurance industry. This momentous occasion was marked with a special two-day event that highlighted the company's journey, achievements, and vision for the future.",
+          
+          mainQuote: "For seven decades, Sioufi & Co has stood as a pillar of trust and reliability in the insurance sector. This anniversary is not just about celebrating our past, but also about reaffirming our commitment to excellence for the decades to come.",
+          
+          sections: [
+            {
+              title: "Day 1: A Journey Through History",
+              content: "The celebration kicked off with an elegant gathering of long-standing clients, partners, and industry leaders. The event featured a comprehensive presentation of Sioufi & Co's evolution from a small family business to a leading name in the Middle Eastern insurance sector.",
+              video: "/70years/event-day-1.mp4",
+              isPortrait: true
+            },
+            {
+              title: "Day 2: Looking to the Future",
+              content: "The second day focused on innovation and future prospects. Workshops, panel discussions, and interactive sessions explored emerging trends in the insurance industry and Sioufi & Co's strategic plans to adapt and thrive in changing market conditions.",
+              video: "/70years/event-day-2.mp4",
+              isPortrait: true
+            }
+          ],
+          
+          conclusion: "As Sioufi & Co celebrates this remarkable milestone, the company remains dedicated to its founding principles of integrity, customer service, and adaptability. The 70th anniversary celebration not only honored the company's rich history but also set the stage for continued success and growth in an evolving insurance landscape."
+        },
+        author: "Sioufi & Co Communications Team",
+        department: "Corporate Communications",
+        featured: true,
+        image: "/70years/70years.jpg"
+    },
+    {
         id: 1,
         title: "AXA Middle East honors Sioufi & Co",
         date: "2024-06-27",
@@ -206,7 +239,7 @@ const NewsAndEventsPage = () => {
                   {article.content.mainQuote}
                 </blockquote>
                 
-                {article.content.sections.map((section: { title: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; content: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, index: React.Key | null | undefined) => (
+                {article.content.sections.map((section: any, index: React.Key | null | undefined) => (
                   <div key={index} className="mb-8">
                     <h3 className="text-2xl font-bold text-gold-400 mb-4">
                       {section.title}
@@ -214,6 +247,15 @@ const NewsAndEventsPage = () => {
                     <p className="text-text-secondary dark:text-text-muted leading-relaxed">
                       {section.content}
                     </p>
+                    {section.video && (
+                      <div className={`mt-4 ${section.isPortrait ? "max-w-xs mx-auto" : "w-full"}`}>
+                        <video 
+                          src={section.video}
+                          controls
+                          className={`w-full rounded-lg border border-white/10 ${section.isPortrait ? "aspect-[9/16]" : "aspect-video"}`}
+                        />
+                      </div>
+                    )}
                   </div>
                 ))}
                 

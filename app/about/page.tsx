@@ -3,10 +3,35 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { Diamond, Heart, Trophy, ChevronDown, ChevronUp } from "lucide-react";
+import { Diamond, Heart, Trophy, ChevronDown, ChevronUp, BookOpen, X, ArrowLeft, ArrowRight } from "lucide-react";
+
+// Define interfaces for data structures
+interface Value {
+  icon: React.ReactNode;
+  title: string;
+  summary: string;
+  description: string;
+}
+
+interface ArchiveImage {
+  src: string;
+  alt: string;
+  description: string;
+}
 
 const AboutPage = () => {
-  const values = [
+  const [showArchive, setShowArchive] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
+  const archiveImages: ArchiveImage[] = [
+    { src: "/archive/archive1.JPG", alt: "Historical newspaper 1", description: "Early coverage of Sioufi & Co's founding" },
+    { src: "/archive/archive2.JPG", alt: "Historical newspaper 2", description: "Sioufi & Co's first office announcement" },
+    { src: "/archive/archive3.JPG", alt: "Historical newspaper 3", description: "Coverage of an industry event from the 1960s" },
+    { src: "/archive/archive4.JPG", alt: "Historical newspaper 4", description: "Milestone achievement featured in press" },
+    { src: "/archive/archive5.JPG", alt: "Historical newspaper 5", description: "Historical advertisement from the archives" },
+  ];
+
+  const values: Value[] = [
     {
       icon: <Diamond className="h-16 w-16" />,
       title: "Innovation",
@@ -30,8 +55,13 @@ const AboutPage = () => {
     },
   ];
 
-  const ValueCard = ({ value, index }: any) => {
-    const [isExpanded, setIsExpanded] = useState(false);
+  interface ValueCardProps {
+    value: Value;
+    index: number;
+  }
+
+  const ValueCard: React.FC<ValueCardProps> = ({ value, index }) => {
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
     return (
       <div className="flex flex-col items-center p-6 sm:p-12 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
@@ -80,8 +110,149 @@ const AboutPage = () => {
     );
   };
 
+  const ArchiveModal = () => {
+    return (
+      <AnimatePresence>
+        {showArchive && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+            onClick={() => {
+              if (selectedImage !== null) {
+                setSelectedImage(null);
+              } else {
+                setShowArchive(false);
+              }
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="bg-primary-light dark:bg-primary-dark rounded-xl p-6 max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
+                <h3 className="font-title text-3xl bg-gradient-to-r from-gold-400 via-gold-600 to-gold-400 bg-clip-text text-transparent">
+                  The Sioufi & Co Archives
+                </h3>
+                <button
+                  onClick={() => setShowArchive(false)}
+                  className="text-text-muted hover:text-gold-400 transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <p className="text-text-secondary dark:text-text-muted mb-6">
+                Explore historical newspaper clippings and documents showcasing Sioufi & Co's legacy through the decades. Click on any image to view it in detail.
+              </p>
+
+              {selectedImage !== null ? (
+                <FullSizeImage
+                  image={archiveImages[selectedImage]}
+                  index={selectedImage}
+                  onClose={() => setSelectedImage(null)}
+                  onNext={() => setSelectedImage((prev:any) => (prev + 1) % archiveImages.length)}
+                  onPrevious={() => setSelectedImage((prev:any) => (prev - 1 + archiveImages.length) % archiveImages.length)}
+                  total={archiveImages.length}
+                />
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {archiveImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className="rounded-lg overflow-hidden border border-white/10 shadow-lg bg-white/5 cursor-pointer transform transition-all duration-300 hover:shadow-gold-400/20 hover:border-gold-400/30 hover:-translate-y-1"
+                      onClick={() => setSelectedImage(index)}
+                    >
+                      <div className="relative aspect-[4/3]">
+                        <Image
+                          src={image.src}
+                          alt={image.alt}
+                          fill
+                          className="object-cover object-center"
+                        />
+                      </div>
+                      <div className="p-3 text-center">
+                        <p className="text-gold-400 font-medium">{image.alt}</p>
+                        <p className="text-text-muted text-sm mt-1">{image.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  };
+
+  interface FullSizeImageProps {
+    image: ArchiveImage;
+    index: number;
+    onClose: () => void;
+    onNext: () => void;
+    onPrevious: () => void;
+    total: number;
+  }
+
+  const FullSizeImage: React.FC<FullSizeImageProps> = ({ image, index, onClose, onNext, onPrevious, total }) => {
+    return (
+      <div className="px-4">
+        <div className="flex justify-between items-center mb-4">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onPrevious();
+            }}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-gold-500 transition-colors"
+          >
+            <ArrowLeft size={20} />
+          </button>
+
+          <div className="text-text-muted">
+            {index + 1} of {total}
+          </div>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onNext();
+            }}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-gold-500 transition-colors"
+          >
+            <ArrowRight size={20} />
+          </button>
+        </div>
+
+        <div className="relative w-full max-h-[70vh] rounded-lg overflow-hidden shadow-xl mx-auto">
+          <div className="relative h-[70vh] w-full">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-contain"
+            />
+          </div>
+        </div>
+
+        <div className="mt-4 text-center">
+          <h4 className="text-xl font-medium text-gold-400">{image.alt}</h4>
+          <p className="text-text-secondary dark:text-text-muted mt-2">{image.description}</p>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-primary-light dark:bg-primary-dark">
+      {/* Archive Modal */}
+      <ArchiveModal />
+
       {/* Hero Section */}
       <div className="relative bg-gradient-to-b from-[#1B365D] to-white dark:from-[#1B365D] dark:to-dark-primary">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
@@ -127,6 +298,22 @@ const AboutPage = () => {
               />
             </div>
           </div>
+
+          {/* Archive Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex justify-center mt-8 mb-16"
+          >
+            <button
+              onClick={() => setShowArchive(true)}
+              className="flex items-center gap-2 px-8 py-4 rounded-full bg-gold-500 hover:bg-gold-600 text-white font-semibold transition-colors duration-300 shadow-lg group"
+            >
+              <BookOpen className="w-5 h-5 group-hover:animate-pulse" />
+              <span>Open the Archive</span>
+            </button>
+          </motion.div>
         </div>
       </div>
 

@@ -58,6 +58,18 @@ const teamData: TeamMember[] = [
     position: "Courrier",
     image: "/team/mohammedsalloum.png",
   },
+  {
+    id: 10,
+    name: "Hannadi Mansour",
+    position: "Accountant",
+    image: "/team/hanadi.jpg",
+  },
+  {
+    id: 11,
+    name: "Jean-Marie Chehade",
+    position: "Assistant",
+    image: "/team/jeanmarie.jpg",
+  },
 
 
 
@@ -69,7 +81,7 @@ const TeamSection: React.FC = () => {
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
     <div className="group relative flex flex-col items-center p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
       <div className="relative mb-6">
-        <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden bg-gradient-to-br from-[#1B365D]/50 to-[#1B365D] ring-4 ring-white/10 dark:ring-white/5 shadow-lg">
+        <div className="w-40 h-40 md:w-60 md:h-60 rounded-full overflow-hidden bg-gradient-to-br from-[#1B365D]/50 to-[#1B365D] ring-4 ring-white/10 dark:ring-white/5 shadow-lg">
           <div className="relative w-full h-full">
             <Image
               src={member.image}

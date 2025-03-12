@@ -17,6 +17,11 @@ const companyNewsData = [
           
           sections: [
             {
+              title: "The Official Invitation",
+              content: "Sioufi & Co extended a warm invitation to all its partners, clients, and industry peers to join in the celebration of this historic milestone. The elegantly designed invitation card captured the essence of the company's heritage and its forward-looking vision.",
+              image: "/70years/invitation.jpg"
+            },
+            {
               title: "Day 1: A Journey Through History",
               content: "The celebration kicked off with an elegant gathering of long-standing clients, partners, and industry leaders. The event featured a comprehensive presentation of Sioufi & Co's evolution from a small family business to a leading name in the Middle Eastern insurance sector.",
               video: "/70years/event-day-1.mp4",
@@ -254,6 +259,21 @@ const NewsAndEventsPage = () => {
                           controls
                           className={`w-full rounded-lg border border-white/10 ${section.isPortrait ? "aspect-[9/16]" : "aspect-video"}`}
                         />
+                      </div>
+                    )}
+                    {section.image && (
+                      <div className="mt-6 max-w-lg mx-auto">
+                        <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden border border-gold-400/30 shadow-lg">
+                          <Image
+                            src={section.image}
+                            alt="Official Invitation"
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
+                        <p className="text-center text-text-muted italic mt-2">
+                          The official invitation card for Sioufi & Co's 70th anniversary celebration
+                        </p>
                       </div>
                     )}
                   </div>

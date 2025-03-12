@@ -17,11 +17,6 @@ const companyNewsData = [
           
           sections: [
             {
-              title: "The Official Invitation",
-              content: "Sioufi & Co extended a warm invitation to all its partners, clients, and industry peers to join in the celebration of this historic milestone. The elegantly designed invitation card captured the essence of the company's heritage and its forward-looking vision.",
-              image: "/70years/invitation.jpg"
-            },
-            {
               title: "Day 1: A Journey Through History",
               content: "The celebration kicked off with an elegant gathering of long-standing clients, partners, and industry leaders. The event featured a comprehensive presentation of Sioufi & Co's evolution from a small family business to a leading name in the Middle Eastern insurance sector.",
               video: "/70years/event-day-1.mp4",

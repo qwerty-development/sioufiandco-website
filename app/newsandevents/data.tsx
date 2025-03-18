@@ -35,7 +35,7 @@ export const companyNewsData = [
       author: "Sioufi & Co Communications Team",
       department: "Corporate Communications",
       featured: true,
-      image: "/70years/cover.JPG"
+      image: "/70years/70years.JPG"
   },
   {
       id: 1,

@@ -12,6 +12,7 @@ const logos = [
   { name: "Fidelity", src: "/logo/fidelity.png" },
   { name: "SNA", src: "/logo/sna.png" },
   { name: "Cumberland", src: "/logo/cumberland.png" },
+  { name: "Al Mashrek", src: "/logo/almashrek.png" },
 ];
 
 export default function PartnerLogos() {

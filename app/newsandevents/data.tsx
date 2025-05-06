@@ -13,13 +13,12 @@ export const companyNewsData = [
         sections: [
           {
             title: "Day 1: A Journey Through History",
-            content: "The celebration kicked off with an elegant gathering of long-standing clients, partners, and industry leaders. The event featured a comprehensive presentation of Sioufi & Co's evolution from a small family business to a leading name in the Middle Eastern insurance sector.",
+            content: "The celebration kicked off with an elegant gathering of long-standing clients, partners, and industry leaders.",
             video: "/70years/event-day-1.mp4",
             isPortrait: true
           },
           {
             title: "Day 2: Looking to the Future",
-            content: "The second day focused on innovation and future prospects. Workshops, panel discussions, and interactive sessions explored emerging trends in the insurance industry and Sioufi & Co's strategic plans to adapt and thrive in changing market conditions.",
             video: "/70years/event-day-2.mp4",
             isPortrait: true
           },
@@ -35,7 +34,7 @@ export const companyNewsData = [
       author: "Sioufi & Co Communications Team",
       department: "Corporate Communications",
       featured: true,
-      image: "/70years/70years.JPG"
+      image: "/70years/gallery/19.JPG"
   },
   {
       id: 1,
